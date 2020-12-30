@@ -1,7 +1,9 @@
 package com.egorshustov.autofilltest
 
+import android.app.PendingIntent
 import android.app.assist.AssistStructure.ViewNode
 import android.content.Context
+import android.content.Intent
 import android.os.CancellationSignal
 import android.service.autofill.*
 import android.util.Log
@@ -28,6 +30,17 @@ class EmailAddressFilter : AutofillService() {
 
         val primaryEmailView = RemoteViews(packageName, R.layout.item_email_suggestion)
         primaryEmailView.setTextViewText(R.id.text_email_suggestion, primaryEmailText)
+        primaryEmailView.setOnClickResponse(
+            R.id.button_some_action, RemoteViews.RemoteResponse.fromPendingIntent(
+                PendingIntent.getActivity(
+                    this,
+                    1001,
+                    Intent(this, SecondActivity::class.java),
+                    PendingIntent.FLAG_CANCEL_CURRENT
+                )
+            )
+        )
+
         val secondaryEmailView = RemoteViews(packageName, R.layout.item_email_suggestion)
         secondaryEmailView.setTextViewText(R.id.text_email_suggestion, secondaryEmailText)
 

@@ -8,6 +8,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutofillTest">
 
+        <activity android:name=".SecondActivity" />
+        
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
